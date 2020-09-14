@@ -330,30 +330,36 @@ simulateiv <- function(n=1000, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrum
 ##Function use is the same as before, except rhox
 sink("NUL")
 mad1 = simulateiv(rhoxz = 0.1, rhoxe = c(.1,.2,0.3,.4,.5))
+mad2 = simulateiv(rhoxz = 0.3, rhoxe = c(.1,.2,0.3,.4,.5))
+mad3 = simulateiv(rhoxz = 0.5, rhoxe =c(.1,.2,0.3,.4,.5))
+mad4 = simulateiv(rhoxz = 0.7, rhoxe = c(.1,.2,0.3,.4,.5))
+mad5 = simulateiv(rhoxz = 0.9, rhoxe = c(.1,.2,0.3,.4,.5))
+sink()
+
 mad1$results
 mad1$coverage
-mad2 = simulateiv(rhoxz = 0.3, rhoxe = c(.1,.2,0.3,.4,.5))
+
 mad2$results
 mad2$coverage
-mad3 = simulateiv(rhoxz = 0.5, rhoxe =c(.1,.2,0.3,.4,.5))
+
 mad3$results
 mad3$coverage
-mad4 = simulateiv(rhoxz = 0.7, rhoxe = c(.1,.2,0.3,.4,.5))
+
 mad4$results
 mad4$coverage
-mad5 = simulateiv(rhoxz = 0.9, rhoxe = c(.1,.2,0.3,.4,.5))
+
 mad5$results
 mad5$coverage
 
 ##two exogenous variables
-mad6 = simulateiv(rhoxz = 0.9, rhoxe = c(.1,.2,0.3,.4,.5), exo = 2)
-mad6$results
-mad6$coverage
+#mad6 = simulateiv(rhoxz = 0.9, rhoxe = c(.1,.2,0.3,.4,.5), exo = 2)
+#mad6$results
+#mad6$coverage
 ## two instruments, feed a vector into rhoxz, with length equal to the number of instruments
-mad7 = simulateiv(rhoxz = c(0.5, .5), rhoxe =c(.1,.2,0.3,.4,.5), instrument = 2)
-mad7$results
-mad7$coverage
+#mad7 = simulateiv(rhoxz = c(0.5, .5), rhoxe =c(.1,.2,0.3,.4,.5), instrument = 2)
+#mad7$results
+#mad7$coverage
 
 ## two exogenous, two instrument
-mad8 = simulateiv(rhoxz = c(0.5, .5), rhoxe = c(.1,.2,0.3,.4,.5), instrument = 2, exo=2)
-mad8
+#mad8 = simulateiv(rhoxz = c(0.5, .5), rhoxe = c(.1,.2,0.3,.4,.5), instrument = 2, exo=2)
+#mad8
