@@ -1,3 +1,19 @@
+#!/bin/bash
+#
+#SBATCH --partition=normal
+#SBATCH --ntasks=1
+#SBATCH --mem=1024
+#SBATCH --output=jobname_%J_stdout.txt
+#SBATCH --error=regress_stderr.txt
+#SBATCH --time=6:00:00
+#SBATCH --job-name=simulations
+#SBATCH --mail-user=christopher.p.danko-1@ou.edu
+#SBATCH --mail-type=ALL
+#SBATCH --chdir=/home/danko/test
+#
+#################################################
+hostname
+
 rm(list = ls())
 library(MASS)
 library(ks)
@@ -5,7 +21,7 @@ library(lmtest)
 library(ivpack)
 
 set.seed(8675309)
-simulateiv <- function(n=1000, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrument =1 ){
+simulateiv <- function(n=1000, size=10, rhoxz, rhoxe, eevs= 1, exo =1, instrument =1 ){
 ##rho = correlation of instrumental variable with x
 ##  Initialize matrices
 rhoxz <- matrix(rhoxz, nrow=length(rhoxz), ncol=eevs)
@@ -120,7 +136,7 @@ probitcf2 <- glm(y_values ~. , family = binomial(link = "probit"), data = cfdata
 r6[i, j] <- probitcf2$coefficients[2]
 
 ##Bootstrap standard errors
-probitboots <- function(bootsize=599){
+probitboots <- function(bootsize=100){
 bootse <- c()
 for (p in 1:bootsize){
 rows = sample(1:n, 1000, replace = TRUE)
@@ -196,7 +212,7 @@ secondstagespec$specHat  <- specHat
 specialreg2 <- lm(t~specHat, data=trimdat)
 r7[i, j] <- specialreg2$coefficients[2]
 
-cfboots <- function(bootsize=599){
+cfboots <- function(bootsize=100){
   bootse <- c()
   for (p in 1:bootsize){
     rows = sample(1:n, 1000, replace = TRUE)
@@ -302,7 +318,7 @@ z = as.matrix(z, ncol = instrument, nrow=n)
     
   r8[i, j] <- out$estimate[2] 
   
-  mleboots <- function(bootsize=599){
+  mleboots <- function(bootsize=100){
     bootse <- c()
     for (p in 1:bootsize){
       rows = sample(1:n, 1000, replace = TRUE)
@@ -367,29 +383,9 @@ coverage[j, 8] <- sum(c8)
 return(list(results =results, coverage=coverage ))  
 }
 
-# mad1 = simulateiv(rhoxz = 0.01, rhoxe = 0.5)
-# mad1
-
 ##Function use is the same as before, except rhox
 mad1 = simulateiv(rhoxz = 0.1, rhoxe = c(.1,.2,0.3,.4,.5))
 mad1$results
 mad1$coverage
-mad2 = simulateiv(rhoxz = 0.3, rhoxe = c(.1,.2,0.3,.4,.5))
-mad2
-mad3 = simulateiv(rhoxz = 0.5, rhoxe =c(.1,.2,0.3,.4,.5))
-mad3
-mad4 = simulateiv(rhoxz = 0.7, rhoxe = c(.1,.2,0.3,.4,.5))
-mad4
-mad5 = simulateiv(rhoxz = 0.9, rhoxe = c(.1,.2,0.3,.4,.5))
-mad5
 
-##two exogenous variables
-mad6 = simulateiv(rhoxz = 0.9, rhoxe = c(.1,.2,0.3,.4,.5), exo = 2)
-mad6
-## two instruments, feed a vector into rhoxz, with length equal to the number of instruments
-mad7 = simulateiv(rhoxz = c(0.5, .5), rhoxe =c(.1,.2,0.3,.4,.5), instrument = 2)
-mad7
 
-## two exogenous, two instrument
-mad8 = simulateiv(rhoxz = c(0.5, .5), rhoxe = c(.1,.2,0.3,.4,.5), instrument = 2, exo=2)
-mad8
