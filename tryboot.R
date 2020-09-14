@@ -311,14 +311,14 @@ simulateiv <- function(n=1000, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrum
       results[j, 7] <- mean(abs(r7[, j]-0.5))  
       results[j, 8] <- mean(abs(r8[, j]-0.5))    
       
-      coverage[j, 1] <- sum(c1)
-      coverage[j, 2] <- sum(c2)  
-      coverage[j, 3] <- sum(c3)  
-      coverage[j, 4] <- sum(c4)
-      coverage[j, 5] <- sum(c5)  
-      coverage[j, 6] <- sum(c6)
-      coverage[j, 7] <- sum(c7)  
-      coverage[j, 8] <- sum(c8)    
+      coverage[j, 1] <- sum(c1[, j])
+      coverage[j, 2] <- sum(c2[, j])  
+      coverage[j, 3] <- sum(c3[, j])  
+      coverage[j, 4] <- sum(c4[, j])
+      coverage[j, 5] <- sum(c5[, j])  
+      coverage[j, 6] <- sum(c6[, j])
+      coverage[j, 7] <- sum(c7[, j])  
+      coverage[j, 8] <- sum(c8[, j])    
     }
   }
   return(list(results =results, coverage=coverage ))  
