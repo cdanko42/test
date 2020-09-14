@@ -96,13 +96,13 @@ simulateiv <- function(n=1000, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrum
       yvaldata = as.data.frame(cbind(y_values, x, xo))
       olsyval <- lm(y_values ~., data=yvaldata)
       r3[i, j] <- olsyval$coefficients[2]
-      cols3 <- coeftest(olsyval)[2, 2]
+      invisible(cols3 <- coeftest(olsyval)[2, 2])
       c3[i, j] <- cover(estimate = r3[i,j], se=cols3)
       
       dat = as.data.frame(cbind(y_values, x,z,xo))
       probyval <- glm(y_values ~., family = binomial(link = "probit"), data = yvaldata)
       r4[i, j] <- probyval$coefficients[2]
-      seprobit <- coeftest(probyval)[2,2]
+      invisible(seprobit <- coeftest(probyval)[2,2])
       c4[i, j] <- cover(estimate = r4[i,j], se=seprobit)
       
       ivyval <- ivreg(y_values~x+ xo, ~z + xo)
@@ -328,6 +328,7 @@ simulateiv <- function(n=1000, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrum
 # mad1
 
 ##Function use is the same as before, except rhox
+sink("NUL")
 mad1 = simulateiv(rhoxz = 0.1, rhoxe = c(.1,.2,0.3,.4,.5))
 mad1$results
 mad1$coverage
