@@ -5,7 +5,7 @@ library(lmtest)
 library(ivpack)
 
 set.seed(8675309)
-simulateiv <- function(n=1000, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrument =1 ){
+simulateiv <- function(n=500, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrument =1 ){
   ##rho = correlation of instrumental variable with x
   ##  Initialize matrices
   rhoxz <- matrix(rhoxz, nrow=length(rhoxz), ncol=eevs)
@@ -120,7 +120,7 @@ simulateiv <- function(n=1000, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrum
       r6[i, j] <- probitcf2$coefficients[2]
       
       ##Bootstrap standard errors
-      probitboots <- function(bootsize=599){
+      probitboots <- function(bootsize=300){
         bootse <- c()
         for (p in 1:bootsize){
           rows = sample(1:n, 1000, replace = TRUE)
@@ -196,7 +196,7 @@ simulateiv <- function(n=1000, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrum
       specialreg2 <- lm(t~specHat, data=trimdat)
       r7[i, j] <- specialreg2$coefficients[2]
       
-      cfboots <- function(bootsize=599){
+      cfboots <- function(bootsize=300){
         bootse <- c()
         for (p in 1:bootsize){
           rows = sample(1:n, 1000, replace = TRUE)
@@ -328,8 +328,9 @@ simulateiv <- function(n=1000, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrum
 # mad1
 
 ##Function use is the same as before, except rhox
-sink("NUL")
 mad1 = simulateiv(rhoxz = 0.1, rhoxe = c(.1,.2,0.3,.4,.5))
+sink("NUL")
+
 mad2 = simulateiv(rhoxz = 0.3, rhoxe = c(.1,.2,0.3,.4,.5))
 mad3 = simulateiv(rhoxz = 0.5, rhoxe =c(.1,.2,0.3,.4,.5))
 mad4 = simulateiv(rhoxz = 0.7, rhoxe = c(.1,.2,0.3,.4,.5))
