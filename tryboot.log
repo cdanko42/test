@@ -1,0 +1,9 @@
+/home/danko/test
+Sun Sep 13 21:14:53 CDT 2020
+export LSCRATCH=/lscratch/35983696
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 35983696 ON c300 CANCELLED AT 2020-09-13T21:16:31 ***
+slurmstepd: error: *** STEP 35983696.0 ON c300 CANCELLED AT 2020-09-13T21:16:31 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 35983682 ON c300 CANCELLED AT 2020-09-13T21:43:31 DUE TO TIME LIMIT ***
+slurmstepd: error: *** STEP 35983682.0 ON c300 CANCELLED AT 2020-09-13T21:43:31 DUE TO TIME LIMIT ***

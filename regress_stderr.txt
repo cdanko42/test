@@ -1,0 +1,20 @@
+Lmod has detected the following error: These module(s) or extension(s) exist
+but cannot be loaded as requested: "GCCcore/4.9.3"
+   Try: "module spider GCCcore/4.9.3" to see how to load the module(s).
+
+
+
+Loading required package: zoo
+
+Attaching package: ‘zoo’
+
+The following objects are masked from ‘package:base’:
+
+    as.Date, as.Date.numeric
+
+Loading required package: AER
+Loading required package: car
+Loading required package: carData
+Loading required package: sandwich
+Loading required package: survival
+There were 50 or more warnings (use warnings() to see the first 50)
