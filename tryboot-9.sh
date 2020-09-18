@@ -13,4 +13,4 @@
 #
 #################################################
 module load R
-Rscript tryboot-1.R > out.txt
+Rscript tryboot-9.R > out.txt
