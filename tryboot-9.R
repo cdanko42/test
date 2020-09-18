@@ -293,7 +293,7 @@ simulateiv <- function(n=1000, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrum
       
       r8[i, j] <- out$estimate[2] 
       
-      mleboots <- function(bootsize=1){
+      mleboots <- function(bootsize=599){
         bootse <- c()
         lik=function(theta){
           
