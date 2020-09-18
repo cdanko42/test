@@ -5,7 +5,7 @@ library(lmtest)
 library(ivpack)
 
 set.seed(8675309)
-simulateiv <- function(n=500, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrument =1 ){
+simulateiv <- function(n=1000, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrument =1 ){
   ##rho = correlation of instrumental variable with x
   ##  Initialize matrices
   rhoxz <- matrix(rhoxz, nrow=length(rhoxz), ncol=eevs)
@@ -120,7 +120,7 @@ simulateiv <- function(n=500, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrume
       r6[i, j] <- probitcf2$coefficients[2]
       
       ##Bootstrap standard errors
-      probitboots <- function(bootsize=300){
+      probitboots <- function(bootsize=599){
         bootse <- c()
         for (p in 1:bootsize){
           rows = sample(1:n, 1000, replace = TRUE)
@@ -196,8 +196,9 @@ simulateiv <- function(n=500, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrume
       specialreg2 <- lm(t~specHat, data=trimdat)
       r7[i, j] <- specialreg2$coefficients[2]
       
-      cfboots <- function(bootsize=300){
+      cfboots <- function(bootsize=599){
         bootse <- c()
+        tryCatch({
         for (p in 1:bootsize){
           rows = sample(1:n, 1000, replace = TRUE)
           bootdat <- as.data.frame(dat[rows, ])
@@ -207,53 +208,43 @@ simulateiv <- function(n=500, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrume
           bootz <- as.matrix(bootdat[, 3:(2+instrument)], ncol=instrument, nrow=n)
           bootdat$demeanbootxo <- (bootxo[,1]-mean(bootxo[,1]))
           demeanbootxo <- bootdat$demeanbootxo
-          
           ##Obtain residuals, which are our U_i
           specialregdata = as.data.frame(cbind(demeanbootxo, bootx, bootz))
           if (exo > 1){
             specialregdata = cbind(specialregdata, bootxo[, 2:exo])
           }
-          
           fssr <- lm(demeanbootxo ~., data=specialregdata)
           bootdat$u <- fssr$residuals
-          
           ##Step 2
           fhat <- kde(bootdat$u,eval.points=bootdat$u)$estimate
-          
-          
           ##Step 3
           ## Create vector that will collect our I(Vi > 0)
           bootdat$idv <- rep(0,nrow(bootdat))
           ## Collect identity function of v
           bootdat$idv <- replace(bootdat$idv,which(bootdat$demeanbootxo>=0),1)
-          
           ##Obtain Ti; y_values=Di, fi and idv is defined above. 
           bootdat$t <- (bootdat[,1]- bootdat$idv)/fhat
-          
           ## Trim extreme values
           lower = .025*n + 1
           upper = .975*n
-          
           sortdat <- bootdat[order(bootdat$t),]
           trimdat <- sortdat[lower:upper,]
           firststagespec <- trimdat[, (2 + eevs):(1+ eevs + instrument + exo)]
           firststagespec <- firststagespec[, -(instrument +1)]
           firststagespec <- as.data.frame(cbind(firststagespec, trimdat[2]))
           colnames(firststagespec)[instrument + exo ] = "x"
-          
           ## Step 4
           ##Conduct 2SLS
           specialreg <- lm(x~., data=firststagespec)
           specHat <- specialreg$fitted.values
           ## Estimate beta
-          
           secondstagespec <- trimdat[, (2 + eevs):(1+ eevs + instrument + exo)]
           secondstagespec$t <- trimdat$t
           secondstagespec$specHat  <- specHat
           specialreg2 <- lm(t~specHat, data=trimdat)
           bootse[p] <- specialreg2$coefficients[2]
-          
         }
+        },error=function(e){cat("Error:",conditionMessage(e), "\n")})
         return(sd(bootse))
       }
       
@@ -299,7 +290,7 @@ simulateiv <- function(n=500, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrume
         eststore<-out$estimate
         estgrad<-out$gradient
         convcode<-out$code}, error=function(e){cat("Error:",conditionMessage(e), "\n")})
-      
+  
       r8[i, j] <- out$estimate[2] 
       
       results[j, 1] <- mean(abs(r1[, j]-0.5))
@@ -318,7 +309,8 @@ simulateiv <- function(n=500, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrume
       coverage[j, 5] <- sum(c5[, j])  
       coverage[j, 6] <- sum(c6[, j])
       coverage[j, 7] <- sum(c7[, j])  
-      coverage[j, 8] <- sum(c8[, j])    
+      coverage[j, 8] <- sum(c8[, j])
+        
     }
   }
   return(list(results =results, coverage=coverage ))  
@@ -329,38 +321,4 @@ simulateiv <- function(n=500, size=1000, rhoxz, rhoxe, eevs= 1, exo =1, instrume
 
 ##Function use is the same as before, except rhox
 mad1 = simulateiv(rhoxz = 0.1, rhoxe = c(.1,.2,0.3,.4,.5))
-sink("NUL")
-
-mad2 = simulateiv(rhoxz = 0.3, rhoxe = c(.1,.2,0.3,.4,.5))
-mad3 = simulateiv(rhoxz = 0.5, rhoxe =c(.1,.2,0.3,.4,.5))
-mad4 = simulateiv(rhoxz = 0.7, rhoxe = c(.1,.2,0.3,.4,.5))
-mad5 = simulateiv(rhoxz = 0.9, rhoxe = c(.1,.2,0.3,.4,.5))
-sink()
-
-mad1$results
-mad1$coverage
-
-mad2$results
-mad2$coverage
-
-mad3$results
-mad3$coverage
-
-mad4$results
-mad4$coverage
-
-mad5$results
-mad5$coverage
-
-##two exogenous variables
-#mad6 = simulateiv(rhoxz = 0.9, rhoxe = c(.1,.2,0.3,.4,.5), exo = 2)
-#mad6$results
-#mad6$coverage
-## two instruments, feed a vector into rhoxz, with length equal to the number of instruments
-#mad7 = simulateiv(rhoxz = c(0.5, .5), rhoxe =c(.1,.2,0.3,.4,.5), instrument = 2)
-#mad7$results
-#mad7$coverage
-
-## two exogenous, two instrument
-#mad8 = simulateiv(rhoxz = c(0.5, .5), rhoxe = c(.1,.2,0.3,.4,.5), instrument = 2, exo=2)
-#mad8
+mad1
