@@ -1,0 +1,58 @@
+[1] "\\captionsetup[table]{labelformat=empty,skip=1pt}\n\\begin{longtable}{lcccc}\n\\caption*{\n\\large Mean Absolute Deviation for Simulation Estimates\\\\ \n\\small \\\\ \n} \\\\ \n\\toprule\n & 2SLPM & Control Function & Maximum Likelihood & Special Regressor \\\\ \n\\midrule\n\\multicolumn{1}{l}{Corr(x, µ) =.1} \\\\ \n\\midrule\nCorr(x, z) = .1 & 0.3773 &             0.4845 & 0.4845 & 0.6596 \\\\ \nCorr(x, z) = .3 & 0.3793 &             0.1576 & 0.1576 & 0.2257 \\\\ \nCorr(x, z) = .5 & 0.3798 &             0.1117 & 0.1117 & 0.1740 \\\\ \nCorr(x, z) = .7 & 0.3796 &             0.1009 & 0.1009 & 0.1652 \\\\ \nCorr(x, z) = .9 & 0.3824 &             0.0518 & 0.0518 & 0.1208 \\\\ \n\\midrule\n\\multicolumn{1}{l}{Corr(x, µ) =.2} \\\\ \n\\midrule\nCorr(x, z) = .1 & 0.3944 &             0.5054 & 0.5051 & 0.6795 \\\\ \nCorr(x, z) = .3 & 0.3810 &             0.1660 & 0.1660 & 0.2191 \\\\ \nCorr(x, z) = .5 & 0.3801 &             0.1287 & 0.1287 & 0.1728 \\\\ \nCorr(x, z) = .7 & 0.3800 &             0.1226 & 0.1226 & 0.1571 \\\\ \nCorr(x, z) = .9 & 0.3838 &             0.0794 & 0.0794 & 0.1244 \\\\ \n\\midrule\n\\multicolumn{1}{l}{Corr(x,µ) =.3} \\\\ \n\\midrule\nCorr(x, z) = .1 & 0.3903 &             0.5234 & 0.5231 & 0.6509 \\\\ \nCorr(x, z) = .3 & 0.3810 &             0.1842 & 0.1842 & 0.2164 \\\\ \nCorr(x, z) = .5 & 0.3822 &             0.1480 & 0.1480 & 0.1706 \\\\ \nCorr(x, z) = .7 & 0.3813 &             0.1702 & 0.1702 & 0.1586 \\\\ \nCorr(x, z) = .9 & 0.3851 &             0.2014 & 0.2010 & 0.1252 \\\\ \n\\midrule\n\\multicolumn{1}{l}{Corr(x, µ) =.4} \\\\ \n\\midrule\nCorr(x, z) = .1 & 0.3909 &             0.5422 & 0.5421 & 0.6363 \\\\ \nCorr(x, z) = .3 & 0.3817 &             0.2220 & 0.2220 & 0.2130 \\\\ \nCorr(x, z) = .5 & 0.3837 &             0.1934 & 0.1933 & 0.1768 \\\\ \nCorr(x, z) = .7 & 0.3825 &             0.2638 & 0.2638 & 0.1531 \\\\ \nCorr(x, z) = .9 & 0.3869 &             0.7783 & 0.2331 & 0.1294 \\\\ \n\\midrule\n\\multicolumn{1}{l}{Corr(x, µ) =.5} \\\\ \n\\midrule\nCorr(x, z) = .1 & 0.4066 &             0.6307 & 0.6306 & 0.6201 \\\\ \nCorr(x, z) = .3 & 0.3870 &             0.2591 & 0.2572 & 0.2228 \\\\ \nCorr(x, z) = .5 & 0.3832 &             0.2872 & 0.2820 & 0.1641 \\\\ \nCorr(x, z) = .7 & 0.3851 &             0.4160 & 0.4160 & 0.1604 \\\\ \nCorr(x, z) = .9 & 0.3850 & NA & 0.1781 & 0.1208 \\\\ \n\\bottomrule\n\\end{longtable}\n"
+attr(,"class")
+[1] "knit_asis"
+attr(,"knit_meta")
+attr(,"knit_meta")[[1]]
+$name
+[1] "amsmath"
+
+$options
+NULL
+
+$extra_lines
+NULL
+
+attr(,"class")
+[1] "latex_dependency"
+
+attr(,"knit_meta")[[2]]
+$name
+[1] "booktabs"
+
+$options
+NULL
+
+$extra_lines
+NULL
+
+attr(,"class")
+[1] "latex_dependency"
+
+attr(,"knit_meta")[[3]]
+$name
+[1] "caption"
+
+$options
+NULL
+
+$extra_lines
+NULL
+
+attr(,"class")
+[1] "latex_dependency"
+
+attr(,"knit_meta")[[4]]
+$name
+[1] "longtable"
+
+$options
+NULL
+
+$extra_lines
+NULL
+
+attr(,"class")
+[1] "latex_dependency"
+
+attr(,"knit_cacheable")
+[1] NA
