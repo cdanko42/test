@@ -1,0 +1,58 @@
+[1] "\\captionsetup[table]{labelformat=empty,skip=1pt}\n\\begin{longtable}{lcccc}\n\\caption*{\n\\large Results from Simulated Endogeneity Tests\\\\ \n\\small \\\\ \n} \\\\ \n\\toprule\n & 2SLPM & Control Function & Maximum Likelihood & Special Regressor \\\\ \n\\midrule\n\\multicolumn{1}{l}{Corr(x, µ) =.1} \\\\ \n\\midrule\nCorr(x, z) = .1 & 0.060 & 0.002 & 0.840 & 0.705 \\\\ \nCorr(x, z) = .3 & 0.098 & 0.099 & 0.587 & 0.707 \\\\ \nCorr(x, z) = .5 & 0.246 & 0.269 & 0.561 & 0.743 \\\\ \nCorr(x, z) = .7 & 0.623 & 0.663 & 0.448 & 0.822 \\\\ \nCorr(x, z) = .9 & 0.999 & 1.000 & 0.255 & 0.976 \\\\ \n\\midrule\n\\multicolumn{1}{l}{Corr(x, µ) =.2} \\\\ \n\\midrule\nCorr(x, z) = .1 & 0.092 & 0.004 & 0.842 & 0.708 \\\\ \nCorr(x, z) = .3 & 0.336 & 0.324 & 0.813 & 0.763 \\\\ \nCorr(x, z) = .5 & 0.790 & 0.824 & 0.946 & 0.873 \\\\ \nCorr(x, z) = .7 & 0.995 & 0.998 & 0.979 & 0.970 \\\\ \nCorr(x, z) = .9 & 1.000 & 1.000 & 0.558 & 1.000 \\\\ \n\\midrule\n\\multicolumn{1}{l}{Corr(x,µ) =.3} \\\\ \n\\midrule\nCorr(x, z) = .1 & 0.124 & 0.009 & 0.873 & 0.730 \\\\ \nCorr(x, z) = .3 & 0.639 & 0.652 & 0.961 & 0.826 \\\\ \nCorr(x, z) = .5 & 0.982 & 0.992 & 0.999 & 0.941 \\\\ \nCorr(x, z) = .7 & 1.000 & 1.000 & 1.000 & 0.996 \\\\ \nCorr(x, z) = .9 & 1.000 & 1.000 & 0.988 & 1.000 \\\\ \n\\midrule\n\\multicolumn{1}{l}{Corr(x, µ) =.4} \\\\ \n\\midrule\nCorr(x, z) = .1 & 0.151 & 0.017 & 0.907 & 0.749 \\\\ \nCorr(x, z) = .3 & 0.849 & 0.921 & 0.996 & 0.866 \\\\ \nCorr(x, z) = .5 & 1.000 & 1.000 & 1.000 & 0.993 \\\\ \nCorr(x, z) = .7 & 1.000 & 1.000 & 1.000 & 1.000 \\\\ \nCorr(x, z) = .9 & 1.000 & 0.580 & 1.000 & 1.000 \\\\ \n\\midrule\n\\multicolumn{1}{l}{Corr(x, µ) =.5} \\\\ \n\\midrule\nCorr(x, z) = .1 & 0.220 & 0.016 & 0.945 & 0.747 \\\\ \nCorr(x, z) = .3 & 0.956 & 0.989 & 1.000 & 0.927 \\\\ \nCorr(x, z) = .5 & 1.000 & 1.000 & 1.000 & 0.998 \\\\ \nCorr(x, z) = .7 & 1.000 & 0.999 & 1.000 & 1.000 \\\\ \nCorr(x, z) = .9 & 1.000 & NA & 0.884 & 1.000 \\\\ \n\\bottomrule\n\\end{longtable}\n"
+attr(,"class")
+[1] "knit_asis"
+attr(,"knit_meta")
+attr(,"knit_meta")[[1]]
+$name
+[1] "amsmath"
+
+$options
+NULL
+
+$extra_lines
+NULL
+
+attr(,"class")
+[1] "latex_dependency"
+
+attr(,"knit_meta")[[2]]
+$name
+[1] "booktabs"
+
+$options
+NULL
+
+$extra_lines
+NULL
+
+attr(,"class")
+[1] "latex_dependency"
+
+attr(,"knit_meta")[[3]]
+$name
+[1] "caption"
+
+$options
+NULL
+
+$extra_lines
+NULL
+
+attr(,"class")
+[1] "latex_dependency"
+
+attr(,"knit_meta")[[4]]
+$name
+[1] "longtable"
+
+$options
+NULL
+
+$extra_lines
+NULL
+
+attr(,"class")
+[1] "latex_dependency"
+
+attr(,"knit_cacheable")
+[1] NA
